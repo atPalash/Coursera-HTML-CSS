@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="Matching Game Part-2">
+    <meta name="dcterms.created" content="Sat, 01 Oct 2016 08:21:03 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <style>
+        div#leftSide
+        {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+        }
+        div#rightSide
+        {
+            position: absolute;
+            left: 500px;
+            width: 500px;
+            height: 500px;
+            border-left: 1px solid black;
+        }
+    </style>
+
+    <title>
+        Matching Game
+    </title>
+</head>
+<body id="thebody" onload="generateFaces()" onclick="gameOver()">
+<script type="text/javascript">
+        var numberoffaces=5;
+
+        function generateFaces()
+        {
+            var theLeftside = document.getElementById("leftSide");
+
+                for(var i=0;i<numberoffaces;i++)
+                {
+                    var x = document.createElement("img");
+                    var y=Math.random()*400;
+                    var z=Math.random()*400;
+                    x.setAttribute("src","http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png");
+                    x.style.position = "absolute";
+                    x.style.left = y+"px";
+                    x.style.top=z+"px";
+                    x.style.width = "100px" ;
+                    x.style.height = "100px";
+                    x.setAttribute("alt", "Smile");
+                    theLeftside.appendChild(x);
+                }
+            var theRightside = document.getElementById("rightSide");
+            var the_node=document.getElementById("leftSide");
+            var leftSideImages = the_node.cloneNode(true);
+            leftSideImages.removeChild(leftSideImages.lastChild);
+            theRightside.appendChild(leftSideImages);
+            numberoffaces += 5;
+            theLeftside.lastChild.onclick=function nextLevel(event)
+                    {
+                            while (theLeftside.firstChild){
+                                theLeftside.removeChild(theLeftside.firstChild);
+                            }
+
+                            while (theRightside.firstChild){
+                                theRightside.removeChild(theRightside.firstChild);
+                            }
+                        event.stopPropagation();
+                        generateFaces();
+
+                    }
+
+        }
+        function gameOver() {
+            alert("Game Over!");
+        }
+</script>
+<h1>Click on the extra smiling face on the left !</h1>
+<div id="leftSide"></div>
+<div id="rightSide"></div>
+
+</body>
+</html>

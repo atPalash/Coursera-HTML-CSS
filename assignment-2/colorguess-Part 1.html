@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>colorguessgame</title>
+</head>
+<body onload="colorguess()" style="position:absolute">
+<script>
+    var user_input_text;
+    var guess = 1;
+    var color = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+    var color_target_int = Math.floor(Math.random() * 10);
+    var color_target_text;
+    var i = 0;
+    var finished = false;
+    function colorguess()
+    {
+
+        while (i < color.length)
+        {
+            if (color_target_int == i)
+            {
+                color_target_text = color[i];
+            }
+            i++;
+        }
+        alert("CHECK: " +color_target_text);
+        while (!finished) {
+            user_input_text = prompt("I am thinking of one of these color: " + "blue, cyan, gold, green, magenta, orange, red, white, yellow\n\n" + "what color am I thinking");
+            finished = check_guess();
+            guess++;
+        }
+    }
+
+        function check_guess()
+        {
+            if (user_input_text == color_target_text)
+            {
+                alert("Congratulations!you have guessed the color:\n" + "it took " + guess + " guesses\n");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+</script>
+
+</body>
+</html>

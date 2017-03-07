@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>colorguessgame</title>
+</head>
+<body onload="colorguess()" style="position:absolute">
+<script>
+    function colorguess()
+    {
+        var user_input_text = null;
+        var user_input_int = null;
+        var color = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+        var color_target_int = Math.floor(Math.random() * 10);
+        var color_target_text;
+        var finished = false;
+        var guess = 1;
+        var i = 0;
+        var j = 0;
+
+
+        while (i < color.length)
+        {
+            if (color_target_int == i)
+            {
+                color_target_text = color[i];
+            }
+            i++;
+        }
+        alert("CHECK: "+color_target_text);
+        while (!finished)
+        {
+            user_input_text = prompt("I am thinking of one of these color:" + "blue, cyan, gold, green, magenta, orange, red, white, yellow\n\n" + "what color am I thinking");
+            while (j < color.length)
+            {
+                if (user_input_text == color[j])
+                {
+                    user_input_int = j;
+                }
+                j++;
+            }
+            finished = check_guess();
+            j = 0;
+            user_input_int = null;
+            guess++;
+        }
+
+        function check_guess()
+        {
+            if (user_input_int == null)
+            {
+                alert("I don't recognise your color\n\n" + "Please try again");
+                return false;
+            }
+            else if (user_input_int > color_target_int)
+            {
+                alert("Sorry your guess is not correct!\n" + "Hint:your color is alphabetically higher than mine\n" + "Please try again");
+                return false;
+            }
+            else if (user_input_int < color_target_int)
+            {
+                alert("Sorry your guess is not correct!\n" + "Hint:your color is alphabetically lower than mine\n" + "Please try again");
+                return false;
+            }
+            else if (user_input_int == color_target_int)
+            {
+                document.body.style.backgroundColor = user_input_text;
+                setTimeout(function() { alert("Congratulations!you have guessed the color\n" + "it took " + guess + " guesses\n" + "you can see in the background"); }, 0);
+                return true;
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>
